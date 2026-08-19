@@ -1,0 +1,31 @@
+services:
+  frontend:
+    build: .
+    container_name: watchnow-frontend
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/usr/share/nginx/html
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    container_name: watchnow-backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+
+  database:
+    image: postgres:16-alpine
+    container_name: watchnow-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

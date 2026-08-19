@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WatchNow — Stream the latest movies, TV shows, and originals in 4K Ultra HD. Your premium OTT destination.">
+  <meta name="theme-color" content="#0B0B0F">
+  <title>WatchNow — Stream Movies &amp; TV Shows Online</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Design System -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ────────────────────────────────────────── -->
+<!-- PARTICLE CANVAS                           -->
+<!-- ────────────────────────────────────────── -->
+<canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+<!-- ────────────────────────────────────────── -->
+<!-- NAVBAR                                    -->
+<!-- ────────────────────────────────────────── -->
+<nav id="navbar" role="navigation" aria-label="Main navigation">
+
+  <!-- Brand -->
+  <a href="#" class="nav-brand" aria-label="WatchNow Home">
+    <img src="./img/icon.png" alt="WatchNow Logo">
+    WatchNow
+  </a>
+
+  <!-- Desktop Links -->
+  <ul class="nav-links" role="list">
+    <li><a href="#hero-section"         class="nav-link-item active">Home</a></li>
+    <li><a href="#new-releases"         class="nav-link-item">Movies</a></li>
+    <li><a href="#trending"             class="nav-link-item">TV Shows</a></li>
+    <li><a href="#trending"             class="nav-link-item">Trending</a></li>
+
+    <!-- Genre dropdown -->
+    <li class="nav-dropdown-wrapper">
+      <span class="nav-link-item" tabindex="0">
+        Genres
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;display:inline;margin-left:4px;vertical-align:middle"><path d="m6 9 6 6 6-6"/></svg>
+      </span>
+      <ul class="nav-dropdown-menu" role="menu">
+        <li><a class="nav-dropdown-item" role="menuitem" href="#action-thriller">Action &amp; Thriller</a></li>
+        <li><a class="nav-dropdown-item" role="menuitem" href="#comedy-romance">Comedy &amp; Romance</a></li>
+        <li><a class="nav-dropdown-item" role="menuitem" href="#scifi">Sci-Fi &amp; Fantasy</a></li>
+        <li><a class="nav-dropdown-item" role="menuitem" href="#horror">Horror</a></li>
+        <li><a class="nav-dropdown-item" role="menuitem" href="#drama">Drama</a></li>
+        <li><a class="nav-dropdown-item" role="menuitem" href="#top-rated">Top Rated</a></li>
+      </ul>
+    </li>
+
+    <li><a href="#my-list-section" class="nav-link-item">My List</a></li>
+  </ul>
+
+  <!-- Right Section -->
+  <div class="nav-right">
+
+    <!-- Search -->
+    <div class="search-wrapper">
+      <div class="search-input-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="search-input" type="search" placeholder="Search movies, shows, actors…" autocomplete="off" aria-label="Search">
+      </div>
+      <!-- Search Dropdown -->
+      <div id="search-dropdown" role="listbox" aria-label="Search results"></div>
+    </div>
+
+    <!-- Notification Bell -->
+    <button class="icon-btn" id="notif-btn" aria-label="Notifications">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="notif-dot" aria-hidden="true"></span>
+    </button>
+
+    <!-- Profile Avatar -->
+    <div class="profile-wrapper">
+      <div class="profile-avatar" id="profile-avatar" tabindex="0" aria-label="Profile menu" aria-haspopup="true">SA</div>
+
+      <!-- Profile Dropdown -->
+      <div id="profile-dropdown" role="menu" aria-label="Profile options">
+        <div class="profile-header">
+          <div class="avatar-sm">SA</div>
+          <div>
+            <div class="profile-name">Shivani Ananya</div>
+            <div class="profile-email">shivani@watchnow.com</div>
+          </div>
+        </div>
+        <a class="dropdown-item" role="menuitem" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Manage Profile
+        </a>
+        <a class="dropdown-item" role="menuitem" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Account Settings
+        </a>
+        <a class="dropdown-item" role="menuitem" href="#my-list-section">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          My List
+        </a>
+        <a class="dropdown-item" role="menuitem" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          Help &amp; Support
+        </a>
+        <div class="dd-divider"></div>
+        <a class="dropdown-item danger" role="menuitem" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Sign Out
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile Hamburger -->
+    <button id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+  </div>
+</nav>
+
+<!-- ────────────────────────────────────────── -->
+<!-- MOBILE DRAWER                             -->
+<!-- ────────────────────────────────────────── -->
+<div id="drawer-overlay" aria-hidden="true"></div>
+<div id="mobile-drawer" role="dialog" aria-label="Navigation menu">
+  <button id="drawer-close" aria-label="Close menu">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <nav>
+    <a class="drawer-link active" href="#hero-section">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </a>
+    <a class="drawer-link" href="#new-releases">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+      Movies
+    </a>
+    <a class="drawer-link" href="#trending">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      Trending
+    </a>
+    <a class="drawer-link" href="#action-thriller">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      Genres
+    </a>
+    <a class="drawer-link" href="#my-list-section">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+      My List
+    </a>
+  </nav>
+</div>
+
+<!-- ────────────────────────────────────────── -->
+<!-- HERO SECTION                              -->
+<!-- ────────────────────────────────────────── -->
+<section id="hero-section" aria-label="Featured content">
+
+  <!-- Background slides -->
+  <div class="hero-slides-container" aria-hidden="true">
+    <div class="hero-slide" style="background-image:url('./img/f1.webp')"></div>
+    <div class="hero-slide" style="background-image:url('./img/fight.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('./img/retro.webp')"></div>
+  </div>
+
+  <!-- Cinematic overlay -->
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <!-- Hero Content -->
+  <div class="hero-content">
+    <span class="hero-platform-badge" id="hero-badge">NOW STREAMING</span>
+
+    <h1 class="hero-title hero-title-anim" id="hero-title">F1</h1>
+
+    <div class="hero-meta-row">
+      <div class="imdb-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#111" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span id="hero-rating">7.9</span>
+      </div>
+      <span class="content-rating-badge" id="hero-cr">PG-13</span>
+      <span class="meta-sep" aria-hidden="true"></span>
+      <span class="meta-text" id="hero-year">2025</span>
+      <span class="meta-sep" aria-hidden="true"></span>
+      <span class="meta-text" id="hero-runtime">2h 20min</span>
+    </div>
+
+    <div class="hero-genre-pills" id="hero-genres">
+      <span class="hero-genre-pill">Action</span>
+      <span class="hero-genre-pill">Sport</span>
+      <span class="hero-genre-pill">Drama</span>
+    </div>
+
+    <p class="hero-desc" id="hero-desc">
+      A Formula One racing driver comes out of retirement to mentor a fearless rookie, forging an unlikely partnership on the world's most dangerous circuits in a race against time.
+    </p>
+
+    <div class="hero-cta">
+      <button class="btn-play" id="hero-play-btn" aria-label="Play now">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        Play Now
+      </button>
+      <button class="btn-info" id="hero-info-btn" aria-label="More information">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+        More Info
+      </button>
+    </div>
+  </div>
+
+  <!-- Slide indicators -->
+  <div class="hero-indicators" role="tablist" aria-label="Hero slides">
+    <button class="hero-dot active" role="tab" aria-selected="true"  aria-label="Slide 1"></button>
+    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="Slide 2"></button>
+    <button class="hero-dot"        role="tab" aria-selected="false" aria-label="Slide 3"></button>
+  </div>
+
+  <!-- Arrow controls -->
+  <button class="hero-arrow" id="hero-prev" aria-label="Previous slide">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="hero-arrow" id="hero-next" aria-label="Next slide">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <!-- Auto-play progress bar -->
+  <div class="hero-progress-bar" aria-hidden="true"></div>
+
+</section>
+
+<!-- ────────────────────────────────────────── -->
+<!-- MAIN CONTENT                              -->
+<!-- ────────────────────────────────────────── -->
+<main id="main-content">
+
+  <!-- ── MY LIST (shown only when items exist) ── -->
+  <section class="content-section" id="my-list-section" aria-label="My List">
+    <div class="section-header">
+      <h2 class="section-title">
+        My List
+      </h2>
+      <span class="view-all">View All
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
+    </div>
+    <div class="carousel-container">
+      <button class="carousel-btn prev" aria-label="Scroll left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" role="list" aria-label="My List carousel"></div>
+      <button class="carousel-btn next" aria-label="Scroll right">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── CONTINUE WATCHING ── -->
+  <section class="content-section" id="continue-watching" aria-label="Continue Watching">
+    <div class="section-header">
+      <h2 class="section-title">Continue Watching</h2>
+      <span class="view-all">View All
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
+    </div>
+    <div class="carousel-container">
+      <button class="carousel-btn prev" aria-label="Scroll left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" role="list" aria-label="Continue Watching carousel"></div>
+      <button class="carousel-btn next" aria-label="Scroll right">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── TRENDING NOW ── -->
+  <section class="content-section" id="trending" aria-label="Trending Now">
+    <div class="section-header">
+      <h2 class="section-title">
+        Trending Now
+        <span class="section-badge trending">Hot</span>
+      </h2>
+      <span class="view-all">View All
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
+    </div>
+    <div class="carousel-container">
+      <button class="carousel-btn prev" aria-label="Scroll left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" role="list" aria-label="Trending Now carousel"></div>
+      <button class="carousel-btn next" aria-label="Scroll right">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── POPULAR ON WATCHNOW ── -->
+  <section class="content-section" id="popular" aria-label="Popular on WatchNow">
+    <div class="section-header">
+      <h2 class="section-title">
+        Popular on WatchNow
+        <span class="section-badge popular">Popular</span>
+      </h2>
+      <span class="view-all">View All
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
+    </div>
+    <div class="carousel-container">
+      <button class="carousel-btn prev" aria-label="Scroll left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" role="list" aria-label="Popular carousel"></div>
+      <button class="carousel-btn next" aria-label="Scroll right">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── TOP RATED ── -->
+  <section class="content-section" id="top-rated" aria-label="Top Rated">
+    <div class="section-header">
+      <h2 class="section-title">
+        Top Rated
+        <span class="section-badge top">Best</span>
+      </h2>
+      <span class="view-all">View All
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
+    </div>
+    <div class="carousel-container">
+      <button class="carousel-btn prev" aria-label="Scroll left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" role="list" aria-label="Top Rated carousel"></div>
+      <button class="carousel-btn next" aria-label="Scroll right">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── NEW RELEASES ── -->
+  <section class="content-section" id="new-releases" aria-label="New Releases">
+    <div class="section-header">
+      <h2 class="section-title">
+        New Releases
+        <span class="section-badge new">New</span>
+      </h2>
+      <span class="view-all">View All
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
+    </div>
+    <div class="carousel-container">
+      <button class="carousel-btn prev" aria-label="Scroll left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" role="list" aria-label="New Releases carousel"></div>
+      <button class="carousel-btn next" aria-label="Scroll right">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── ACTION & THRILLER ── -->
+  <section class="content-section" id="action-thriller" aria-label="Action and Thriller">
+    <div class="section-header">
+      <h2 class="section-title">Action &amp; Thriller</h2>
+      <span class="view-all">View All
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
+    </div>
+    <div class="carousel-container">
+      <button class="carousel-btn prev" aria-label="Scroll left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" role="list" aria-label="Action and Thriller carousel"></div>
+      <button class="carousel-btn next" aria-label="Scroll right">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── COMEDY & ROMANCE ── -->
+  <section class="content-section" id="comedy-romance" aria-label="Comedy and Romance">
+    <div class="section-header">
+      <h2 class="section-title">Comedy &amp; Romance</h2>
+      <span class="view-all">View All
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
+    </div>
+    <div class="carousel-container">
+      <button class="carousel-btn prev" aria-label="Scroll left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" role="list" aria-label="Comedy and Romance carousel"></div>
+      <button class="carousel-btn next" aria-label="Scroll right">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── SCI-FI & FANTASY ── -->
+  <section class="content-section" id="scifi" aria-label="Sci-Fi and Fantasy">
+    <div class="section-header">
+      <h2 class="section-title">Sci-Fi &amp; Fantasy</h2>
+      <span class="view-all">View All
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
+    </div>
+    <div class="carousel-container">
+      <button class="carousel-btn prev" aria-label="Scroll left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" role="list" aria-label="Sci-Fi carousel"></div>
+      <button class="carousel-btn next" aria-label="Scroll right">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── HORROR ── -->
+  <section class="content-section" id="horror" aria-label="Horror">
+    <div class="section-header">
+      <h2 class="section-title">Horror</h2>
+      <span class="view-all">View All
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
+    </div>
+    <div class="carousel-container">
+      <button class="carousel-btn prev" aria-label="Scroll left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" role="list" aria-label="Horror carousel"></div>
+      <button class="carousel-btn next" aria-label="Scroll right">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── DRAMA ── -->
+  <section class="content-section" id="drama" aria-label="Drama">
+    <div class="section-header">
+      <h2 class="section-title">Drama</h2>
+      <span class="view-all">View All
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
+    </div>
+    <div class="carousel-container">
+      <button class="carousel-btn prev" aria-label="Scroll left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track" role="list" aria-label="Drama carousel"></div>
+      <button class="carousel-btn next" aria-label="Scroll right">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<!-- ────────────────────────────────────────── -->
+<!-- MOVIE DETAILS MODAL                       -->
+<!-- ────────────────────────────────────────── -->
+<div id="movie-modal" role="dialog" aria-modal="true" aria-label="Movie Details">
+  <div class="modal-backdrop"></div>
+  <div class="modal-panel">
+
+    <!-- Hero Image -->
+    <div class="modal-hero-wrapper">
+      <img id="modal-bg" src="" alt="" aria-hidden="true">
+      <div class="modal-hero-gradient" aria-hidden="true"></div>
+    </div>
+
+    <!-- Close Button -->
+    <button class="modal-close" aria-label="Close modal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <!-- Modal Body -->
+    <div class="modal-body">
+      <div class="modal-content-row">
+
+        <!-- Poster -->
+        <img id="modal-poster" src="" alt="" class="modal-poster" style="width:140px;height:210px;object-fit:cover;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.8);margin-top:-55px;position:relative;z-index:2;border:2px solid rgba(255,255,255,.08);flex-shrink:0;">
+
+        <!-- Info -->
+        <div class="modal-info">
+          <h2 id="modal-title" class="modal-title-text" style="font-family:'Poppins',sans-serif;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:10px;line-height:1.15;"></h2>
+
+          <div class="modal-meta-badges">
+            <div class="modal-imdb-badge">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="#111" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span id="modal-rating"></span>
+            </div>
+            <span class="modal-rating-badge" id="modal-cr"></span>
+            <span class="modal-quality-badge" id="modal-quality-badge"></span>
+            <span class="meta-sep" aria-hidden="true"></span>
+            <span class="meta-text" id="modal-year"></span>
+            <span class="meta-sep" aria-hidden="true"></span>
+            <span class="meta-text" id="modal-runtime"></span>
+          </div>
+
+          <div class="modal-genre-tags" id="modal-genres"></div>
+
+          <p id="modal-desc" style="font-size:.88rem;color:var(--text-secondary);line-height:1.8;margin-bottom:18px;"></p>
+
+          <div class="modal-details-grid">
+            <div>
+              <div class="detail-label">Director</div>
+              <div class="detail-value" id="modal-director"></div>
+            </div>
+            <div>
+              <div class="detail-label">Quality</div>
+              <div class="detail-value" id="modal-quality"></div>
+            </div>
+            <div>
+              <div class="detail-label">Cast</div>
+              <div class="detail-value" id="modal-cast"></div>
+            </div>
+            <div>
+              <div class="detail-label">Languages</div>
+              <div class="detail-value" id="modal-lang"></div>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button class="modal-btn-primary" id="modal-play-btn" aria-label="Watch now">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              Watch Now
+            </button>
+            <button class="modal-btn-secondary" id="modal-trailer-btn" aria-label="Watch trailer">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              Trailer
+            </button>
+            <button class="modal-btn-secondary" id="modal-wl-btn" aria-label="Add to My List">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+              My List
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related movies -->
+      <div class="related-section">
+        <h3 class="related-title">More Like This</h3>
+        <div class="related-track" id="modal-related"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ────────────────────────────────────────── -->
+<!-- FOOTER                                    -->
+<!-- ────────────────────────────────────────── -->
+<footer id="footer-section" role="contentinfo">
+  <div class="footer-top">
+
+    <!-- Brand Column -->
+    <div class="footer-brand-col">
+      <div class="footer-logo">
+        <img src="./img/icon.png" alt="WatchNow Logo">
+        WatchNow
+      </div>
+      <p class="footer-tagline">Your premium destination for movies, TV shows, and original content — streamed in stunning 4K Ultra HD.</p>
+      <div class="footer-social">
+        <a class="social-btn" href="#" aria-label="Twitter / X">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a class="social-btn" href="#" aria-label="Facebook">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a class="social-btn" href="#" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+        <a class="social-btn" href="#" aria-label="WhatsApp">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 0C5.373 0 0 5.373 0 12c0 2.118.554 4.107 1.523 5.832L.057 23.998l6.304-1.654A11.937 11.937 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 11.999 0zm.001 21.818a9.817 9.817 0 0 1-5.002-1.368l-.359-.214-3.72.975.993-3.62-.234-.373A9.78 9.78 0 0 1 2.182 12c0-5.413 4.406-9.818 9.818-9.818 5.413 0 9.818 4.405 9.818 9.818 0 5.414-4.405 9.818-9.818 9.818z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer Nav Columns -->
+    <div class="footer-col">
+      <h4 class="footer-col-title">Browse</h4>
+      <ul>
+        <li><a href="#hero-section">Home</a></li>
+        <li><a href="#new-releases">Movies</a></li>
+        <li><a href="#trending">TV Shows</a></li>
+        <li><a href="#trending">Trending</a></li>
+        <li><a href="#my-list-section">My List</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4 class="footer-col-title">Genres</h4>
+      <ul>
+        <li><a href="#action-thriller">Action &amp; Thriller</a></li>
+        <li><a href="#comedy-romance">Comedy &amp; Romance</a></li>
+        <li><a href="#scifi">Sci-Fi &amp; Fantasy</a></li>
+        <li><a href="#horror">Horror</a></li>
+        <li><a href="#drama">Drama</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4 class="footer-col-title">Help</h4>
+      <ul>
+        <li><a href="#">Account</a></li>
+        <li><a href="#">Subscription</a></li>
+        <li><a href="#">Devices</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4 class="footer-col-title">Company</h4>
+      <ul>
+        <li><a href="#">About WatchNow</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Investor Relations</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-copyright">© 2025 WatchNow, Shivani Ananya. All rights reserved.</span>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Cookie Preferences</a>
+      <a href="#">Legal Notices</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ────────────────────────────────────────── -->
+<!-- MOBILE BOTTOM NAVIGATION                  -->
+<!-- ────────────────────────────────────────── -->
+<nav id="mobile-bottom-nav" role="navigation" aria-label="Mobile navigation">
+  <div class="bottom-nav-items">
+    <button class="bottom-nav-item active" aria-label="Home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </button>
+    <button class="bottom-nav-item" aria-label="Search">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      Search
+    </button>
+    <button class="bottom-nav-item" aria-label="My List">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+      My List
+    </button>
+    <button class="bottom-nav-item" aria-label="Profile">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Profile
+    </button>
+  </div>
+</nav>
+
+<!-- Application Script -->
+<script src="app.js"></script>
+
+</body>
+</html>
